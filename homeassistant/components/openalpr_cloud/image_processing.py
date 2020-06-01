@@ -24,7 +24,7 @@ import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
-OPENALPR_API_URL = "https://api.openalpr.com/v1/recognize"
+OPENALPR_API_URL = "https://api.openalpr.com/v2/recognize"
 
 OPENALPR_REGIONS = [
     "au",
@@ -39,6 +39,7 @@ OPENALPR_REGIONS = [
     "sg",
     "us",
     "vn2",
+    "th",
 ]
 
 CONF_REGION = "region"
