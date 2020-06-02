@@ -24,7 +24,7 @@ import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
-OPENALPR_API_URL = "https://api.openalpr.com/v1/recognize"
+OPENALPR_API_URL = "https://api.openalpr.com/v2/recognize_bytes"
 
 OPENALPR_REGIONS = [
     "au",
@@ -39,6 +39,7 @@ OPENALPR_REGIONS = [
     "sg",
     "us",
     "vn2",
+    "th",
 ]
 
 CONF_REGION = "region"
@@ -111,7 +112,7 @@ class OpenAlprCloudEntity(ImageProcessingAlprEntity):
         websession = async_get_clientsession(self.hass)
         params = self._params.copy()
 
-        body = {"image_bytes": str(b64encode(image), "utf-8")}
+        body = str(b64encode(image), "utf-8")
 
         try:
             with async_timeout.timeout(self.timeout):
@@ -133,7 +134,7 @@ class OpenAlprCloudEntity(ImageProcessingAlprEntity):
         vehicles = 0
         result = {}
 
-        for row in data["plate"]["results"]:
+        for row in data["results"]:
             vehicles += 1
 
             for p_data in row["candidates"]:
